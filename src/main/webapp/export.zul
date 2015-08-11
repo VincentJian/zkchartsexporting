@@ -1,0 +1,19 @@
+<zk xmlns:w="client">
+	<script src="/js/export.js"></script>
+	<window apply="demo.ctrl.ExportComposer">
+		<charts id="chart1" type="column" width="600" />
+		<charts id="chart2" type="line" width="600" />
+		<hlayout>
+			<listbox mold="select" id="format">
+				<listitem label="svg" selected="true" />
+				<listitem label="png" />
+				<listitem label="jpg" />
+				<listitem label="tiff" />
+				<listitem label="pdf" />
+			</listbox>
+			<button id="export1" label="Export Column Chart" w:onClick="fireExportEvent(this, 'chart1')" />
+			<button id="export2" label="Export Line Chart" w:onClick="fireExportEvent(this, 'chart2')" />
+			<button id="exportAll" label="Export All" w:onClick="fireExportEvent(this, ['chart1', 'chart2'])" />
+		</hlayout>
+	</window>
+</zk>

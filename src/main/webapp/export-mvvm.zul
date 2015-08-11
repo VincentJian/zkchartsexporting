@@ -1,0 +1,27 @@
+<zk xmlns:w="client">
+	<script src="/js/export.js"></script>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('demo.ctrl.ExportVM')">
+		<charts id="chart1" type="column" model="@load(vm.model)"
+			title="@load(vm.title)" width="600"
+			onCreate="@command('initChart', exportOption=self.exporting)" />
+		<charts id="chart2" type="line" model="@load(vm.model)"
+			title="@load(vm.title)" width="600"
+			onCreate="@command('initChart', exportOption=self.exporting)" />
+		<hlayout>
+			<listbox mold="select" id="format">
+				<listitem label="svg" selected="true" />
+				<listitem label="png" />
+				<listitem label="jpg" />
+				<listitem label="tiff" />
+				<listitem label="pdf" />
+			</listbox>
+			<button label="Export"
+				w:onClick="zk.fireExportEvent(this, 'chart1')"
+				onExport="@command('export', fmt=format.selectedItem.label, title=chart1.title.text, svg=event.data.svg)" />
+			<button label="Export All"
+				w:onClick="zk.fireExportEvent(this, ['chart1', 'chart2'])"
+				onExport="@command('export', fmt=format.selectedItem.label, title=chart1.title.text, svg=event.data.svg)" />
+		</hlayout>
+	</window>
+</zk>
